@@ -1,7 +1,19 @@
 import { Button } from "./Button"
 
+interface Genre {
+  id: number;
+  name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
+  title: string;
+}
 
-export function SideBar({ genres, selectedGenreId, onHandleClickButton }) {
+interface SideBarProps {
+  onHandleClickButton: (id: number) => void;
+  selectedGenreId: number;
+  genres: Genre[]
+}
+
+export function SideBar({ onHandleClickButton, selectedGenreId, genres }: SideBarProps) {
+
   return (
     <nav className="sidebar">
       <span>Watch<p>Me</p></span>
@@ -17,7 +29,6 @@ export function SideBar({ genres, selectedGenreId, onHandleClickButton }) {
           />
         ))}
       </div>
-
     </nav>
   )
 }
