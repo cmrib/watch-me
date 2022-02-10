@@ -1,6 +1,7 @@
 import { Button } from "./Button"
 import { useEffect, useState } from 'react'
 import { api } from '../services/api';
+import { useGenre } from '../hooks/useGenre';
 import '../styles/sidebar.scss';
 
 interface SideBarProps {
@@ -14,8 +15,9 @@ interface GenreResponseProps {
   title: string;
 }
 
-export function SideBar({ onHandleClickButton, selectedGenreId }: SideBarProps) {
+export function SideBar() {
 
+  const { selectedGenreId, handleClickButton } = useGenre()
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export function SideBar({ onHandleClickButton, selectedGenreId }: SideBarProps) 
             key={String(genre.id)}
             title={genre.title}
             iconName={genre.name}
-            onClick={() => onHandleClickButton(genre.id)}
+            onClick={() => handleClickButton(genre.id)}
             selected={selectedGenreId === genre.id}
           />
         ))}
